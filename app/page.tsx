@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import layout from "./layout";
 
-export interface Billionaire {
+import Link from "next/link";
+
+interface Billionaire {
   id: string;
   name: string;
   squareImage: string;
@@ -25,13 +25,22 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="grid grid-cols-4 mx-36 mt-8 gap-4">
+    <div className="grid grid-cols-4 mx-36 mt-8 gap-4">
       {billionaires.map((billionaire) => (
-        <div key={billionaire.id} className="bg-neutral-100 w-full h-auto">
+        <Link
+          href={`/billionaire/${billionaire.id}`}
+          key={billionaire.id}
+          className="bg-neutral-100 w-full h-auto"
+        >
           <img src={billionaire.squareImage} />
-          <div>{billionaire.name}</div>
-        </div>
+
+          <div>{billionaire.name} </div>
+          <div className="flex">
+            <div>{billionaire.netWorth} / </div>
+            <div> {billionaire.industries}</div>
+          </div>
+        </Link>
       ))}
-    </main>
+    </div>
   );
 }
