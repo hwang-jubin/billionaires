@@ -28,11 +28,18 @@ export default function Home() {
     <div className="grid grid-cols-4 mx-36 mt-8 gap-4">
       {billionaires.map((billionaire) => (
         <Link
-          href={`/billionaire/${billionaire.id}`}
+          href={`/person/${billionaire.id}`}
           key={billionaire.id}
-          className="bg-neutral-100 w-full h-96 dark:bg-gray-700 dark:text-white flex flex-col "
+          className="bg-neutral-100 w-full h-96 dark:bg-gray-700 dark:text-white flex flex-col p-2 "
         >
-          <img src={billionaire.squareImage} className="w-auto h-auto" />
+          <img
+            src={
+              billionaire.squareImage.includes("undefined")
+                ? "https://i.pinimg.com/474x/3e/c0/d4/3ec0d48e3332288604e8d48096296f3e.jpg"
+                : billionaire.squareImage
+            }
+            className="w-auto h-auto"
+          />
 
           <div className="flex flex-col my-auto ml-3">
             <div className="text-xl">{billionaire.name} </div>

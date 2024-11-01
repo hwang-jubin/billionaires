@@ -2,6 +2,7 @@ export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  console.log("api");
   const { id } = params;
   console.log(id);
   const response = await fetch(
