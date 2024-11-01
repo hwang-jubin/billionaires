@@ -30,14 +30,19 @@ export default function Home() {
         <Link
           href={`/billionaire/${billionaire.id}`}
           key={billionaire.id}
-          className="bg-neutral-100 w-full h-auto"
+          className="bg-neutral-100 w-full h-96 dark:bg-gray-700 dark:text-white flex flex-col "
         >
-          <img src={billionaire.squareImage} />
+          <img src={billionaire.squareImage} className="w-auto h-auto" />
 
-          <div>{billionaire.name} </div>
-          <div className="flex">
-            <div>{billionaire.netWorth} / </div>
-            <div> {billionaire.industries}</div>
+          <div className="flex flex-col my-auto ml-3">
+            <div className="text-xl">{billionaire.name} </div>
+            <div className="flex">
+              <div>
+                {Math.floor(billionaire.netWorth / 1000)} billion /&nbsp;
+              </div>
+
+              <div> {billionaire.industries}</div>
+            </div>
           </div>
         </Link>
       ))}

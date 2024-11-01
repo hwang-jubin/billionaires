@@ -13,9 +13,10 @@ interface FinancialAsset {
   exchangeRate: number;
   interactive: boolean;
   currentPrice: number;
+  exerciseOptionPrice?: number; // 선택적 속성
 }
 
-interface Billionaire {
+interface Person {
   id: string;
   state: string;
   city: string;
@@ -24,23 +25,32 @@ interface Billionaire {
   position: number;
   industries: string[];
   financialAssets: FinancialAsset[];
+  thumbnail: string;
+  squareImage: string;
+  bio: string[];
+  about: string[];
+  netWorth: number;
 }
 
 export default function BillionaireInfo() {
   const param = useParams();
   console.log(param.id);
 
-  const [detail, setDetail] = useState<Billionaire>();
+  const [detail, setDetail] = useState<Person>();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`/api/detail/${param.id}`);
-      const data = (await response.json()) as Billionaire;
+      const data = (await response.json()) as Person;
       setDetail(data);
     };
 
     fetchData();
   }, [param.id]);
 
-  return <div></div>;
+  return (
+    <div>
+      <img src={detail?.thumbnail} />
+    </div>
+  );
 }
