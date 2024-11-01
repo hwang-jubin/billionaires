@@ -1,10 +1,17 @@
+import { NextRequest } from "next/server";
+
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  }
 ) {
   console.log("api");
-  const { id } = params;
+  const id = (await params).id;
   console.log(id);
+
   const response = await fetch(
     `https://billions-api.nomadcoders.workers.dev/person/${id}`,
     {
@@ -13,6 +20,7 @@ export async function GET(
       },
     }
   );
+
   const data = await response.json();
 
   return new Response(JSON.stringify(data), {
